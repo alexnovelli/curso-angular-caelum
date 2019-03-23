@@ -6,8 +6,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  isNewEmailFormOpen = false;
+  private _isNewEmailFormOpen = false;
+  get isNewEmailOpen(){
+    return this._isNewEmailFormOpen;
+  }
   toggleNewEmailForm(){
-    this.isNewEmailFormOpen = !this.isNewEmailFormOpen;
+    this._isNewEmailFormOpen = !this._isNewEmailFormOpen;
   }
 }
