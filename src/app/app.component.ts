@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { NgForm } from '@angular/forms';
+
 import { Email } from './models/email';
 
 @Component({
@@ -27,9 +29,15 @@ export class AppComponent {
   toggleNewEmailForm(){
     this._isNewEmailFormOpen = !this._isNewEmailFormOpen;
   }
-  handleNewEmail(){
+  handleNewEmail(formEmail: NgForm){
+
+    if (formEmail.invalid) return;
+
     let novoEmail = new Email(this.email);
+
     this.emailList.push(novoEmail);
+
+    formEmail.reset();
   }
   
 }
