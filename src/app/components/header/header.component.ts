@@ -10,6 +10,7 @@ import {Component} from '@angular/core';
 })
 
 export class HeaderComponent {
+    titulo = "Bem vindo ao Cmail";
     isMenuOpen = false;
     toggleMenu() {
         this.isMenuOpen = !this.isMenuOpen;
