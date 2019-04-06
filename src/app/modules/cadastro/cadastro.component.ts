@@ -4,7 +4,8 @@ import {
 } from '@angular/core';
 import {
   FormControl,
-  FormGroup
+  FormGroup,
+  Validators
 } from '@angular/forms';
 
 @Component({
@@ -15,19 +16,28 @@ import {
 export class CadastroComponent implements OnInit {
 
   formCadastro = new FormGroup({
-    nome: new FormControl(),
-    username: new FormControl(),
-    senha: new FormControl(),
-    avatar: new FormControl()
+    nome: new FormControl('',[Validators.required, Validators.minLength(6)]),
+    username: new FormControl('',Validators.required),
+    senha: new FormControl('',Validators.required),
+    avatar: new FormControl('',Validators.required),
+    telefone: new FormControl('',[Validators.required, Validators.pattern('[0-9]{4}-?[0-9]{4}[0-9]?')])
   })
 
-  handleCadastrarUsuario() {
-    if (this.formCadastro.valid) {
-      console.log(this.formCadastro.value);
-      this.formCadastro.reset();
-    } else {
-      console.error("Preencher!");
+  validaTodos(form: FormGroup){
+    let controles = form.controls;
+    for (let controle in controles) {
+      let campo = form.get(controle);
+      campo.markAsTouched();
     }
+  }
+
+  handleCadastrarUsuario() {
+    if (this.formCadastro.invalid) {
+     this.validaTodos(this.formCadastro);
+     return
+    }
+
+    this.formCadastro.reset();
     
   }
 
