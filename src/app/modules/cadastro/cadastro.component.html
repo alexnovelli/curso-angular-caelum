@@ -34,7 +34,7 @@
             </cmail-form-group>
 
             <cmail-form-group [controle]="formCadastro.get('telefone')">
-              <input pattern="[0-9]{4}-?[0-9]{4}[0-9]?" cmailFormField name="telefone" formControlName="telefone" required type="tel">
+              <input cmailFormField name="telefone" formControlName="telefone" required type="tel">
               <span class="mdl-textfield__error">Informar um número de telefone é obrigatório!</span>
             </cmail-form-group>
 

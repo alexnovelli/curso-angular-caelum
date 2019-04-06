@@ -10,6 +10,7 @@ import { CadastroComponent } from './modules/cadastro/cadastro.component';
 import { CaixaDeEntradaComponent } from './modules/caixa-de-entrada/caixa-de-entrada.component';
 import { FormGroupComponent } from './components/form-group/form-group.component';
 import { FormFieldDirective } from './components/form-group/form-field.directive';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { FormFieldDirective } from './components/form-group/form-field.directive
     BrowserModule,
     FormsModule,
     ModuloRoteamento,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
