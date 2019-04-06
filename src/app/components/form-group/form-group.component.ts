@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'cmail-form-group',
@@ -6,11 +6,14 @@ import { Component, OnInit, Input } from '@angular/core';
   styles: []
 })
 export class FormGroupComponent implements OnInit {
-  @Input() idCampo = '';
 
-  constructor() { }
+  private idCampo = '';
+
+  constructor(private elemento: ElementRef) { }
 
   ngOnInit() {
+    const input:HTMLInputElement = this.elemento.nativeElement.querySelector('input');
+    this.idCampo = input.name;
   }
 
 

@@ -7,7 +7,25 @@
 
           <form>
 
-            <cmail-form-group idCampo="usuario"></cmail-form-group>
+            <cmail-form-group idCampo="nome">
+              <input cmailFormField  required type="text">
+              <span class="mdl-textfield__error">Informar um nome é obrigatório!</span>
+            </cmail-form-group>
+
+            <cmail-form-group idCampo="username">
+              <input cmailFormField name="username" required type="text">
+              <span class="mdl-textfield__error">Informar um username é obrigatório!</span>
+            </cmail-form-group>
+
+            <cmail-form-group idCampo="senha">
+              <input cmailFormField name="senha" required type="password">
+              <span class="mdl-textfield__error">Informar uma senha é obrigatório!</span>
+            </cmail-form-group>
+
+            <cmail-form-group idCampo="avatar">
+              <input cmailFormField name="avatar" required type="text">
+              <span class="mdl-textfield__error">Informar um endereço de avatar é obrigatório!</span>
+            </cmail-form-group>
 
             <div class="mdl-card__actions">
               <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent">
