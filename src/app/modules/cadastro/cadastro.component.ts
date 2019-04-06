@@ -1,4 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  OnInit
+} from '@angular/core';
+import {
+  FormControl,
+  FormGroup
+} from '@angular/forms';
 
 @Component({
   selector: 'cmail-cadastro',
@@ -7,9 +14,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CadastroComponent implements OnInit {
 
-  constructor() { }
+  formCadastro = new FormGroup({
+    nome: new FormControl(),
+    username: new FormControl(),
+    senha: new FormControl(),
+    avatar: new FormControl()
+  })
 
-  ngOnInit() {
+  handleCadastrarUsuario() {
+    if (this.formCadastro.valid) {
+      console.log(this.formCadastro.value);
+      this.formCadastro.reset();
+    } else {
+      console.error("Preencher!");
+    }
+    
   }
+
+  constructor() {}
+
+  ngOnInit() {}
 
 }

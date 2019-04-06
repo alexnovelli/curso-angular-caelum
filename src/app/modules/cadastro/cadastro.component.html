@@ -5,25 +5,25 @@
         <div class="mdl-layout-spacer"></div>
         <div class="mdl-cell mdl-cell--4-col">
 
-          <form>
+          <form [formGroup]='formCadastro' (ngSubmit)="handleCadastrarUsuario()">
 
             <cmail-form-group idCampo="nome">
-              <input cmailFormField  required type="text">
+              <input cmailFormField name="nome" formControlName="nome" required type="text">
               <span class="mdl-textfield__error">Informar um nome é obrigatório!</span>
             </cmail-form-group>
 
             <cmail-form-group idCampo="username">
-              <input cmailFormField name="username" required type="text">
+              <input cmailFormField name="username" formControlName="username" required type="text">
               <span class="mdl-textfield__error">Informar um username é obrigatório!</span>
             </cmail-form-group>
 
             <cmail-form-group idCampo="senha">
-              <input cmailFormField name="senha" required type="password">
+              <input cmailFormField name="senha" formControlName="senha" required type="password">
               <span class="mdl-textfield__error">Informar uma senha é obrigatório!</span>
             </cmail-form-group>
 
             <cmail-form-group idCampo="avatar">
-              <input cmailFormField name="avatar" required type="text">
+              <input cmailFormField name="avatar" formControlName="avatar" required type="text">
               <span class="mdl-textfield__error">Informar um endereço de avatar é obrigatório!</span>
             </cmail-form-group>
 
