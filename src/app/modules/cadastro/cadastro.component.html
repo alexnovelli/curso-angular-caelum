@@ -7,6 +7,12 @@
 
           <form [formGroup]="formCadastro" (ngSubmit)="handleCadastrarUsuario()">
 
+            <ul *ngIf="mensagensErro" class="mdl-textfield is-invalid">
+              <li *ngFor="let erro of mensagensErro" class="mdl-textfield__error">
+                {{erro.message}}: {{erro.value}}
+              </li>
+            </ul>
+
             <cmail-form-group [controle]="formCadastro.get('nome')">
               <input cmailFormField name="nome" formControlName="nome" required type="text">
               <div *ngIf="formCadastro.get('nome').errors">

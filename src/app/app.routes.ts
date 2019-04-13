@@ -1,14 +1,22 @@
 import { Routes, RouterModule } from "@angular/router";
-import { CaixaDeEntradaComponent } from './modules/caixa-de-entrada/caixa-de-entrada.component';
-import { LoginComponent } from './modules/login/login.component';
-import { CadastroComponent } from './modules/cadastro/cadastro.component';
+import { NgModule } from '@angular/core';
 
 const rotasApp:Routes = [
-    {path: "", component: CadastroComponent},
-    {path: "inbox", component: CaixaDeEntradaComponent},
-    {path: "login", component: LoginComponent},
-    {path: "cadastro", component: CadastroComponent},
+    {path: "inbox", loadChildren: 'src/app/modules/caixa-de-entrada/caixa-de-entrada.module#CaixaDeEntradaModule'},
+    {path: "login",  loadChildren: 'src/app/modules/login/login.module#LoginModule'},
+    {path: "cadastro",  loadChildren: 'src/app/modules/cadastro/cadastro.module#CadastroModule'},
     {path: "**",  redirectTo: "inbox"}
 ]
 
-export const ModuloRoteamento = RouterModule.forRoot(rotasApp);
+@NgModule ({
+    imports: [
+        RouterModule.forRoot(rotasApp)
+    ],
+    exports: [
+        RouterModule
+    ]
+})
+
+export class ModuloRoteamento {
+
+}

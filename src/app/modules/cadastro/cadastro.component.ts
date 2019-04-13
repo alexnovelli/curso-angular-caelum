@@ -1,18 +1,9 @@
-import {
-  Component,
-  OnInit
-} from '@angular/core';
-import {
-  FormControl,
-  FormGroup,
-  Validators
-} from '@angular/forms';
-import {
-  HttpClient, HttpErrorResponse
-} from '@angular/common/http';
-import {
-  map, catchError
-} from 'rxjs/operators'
+import {Component,OnInit} from '@angular/core';
+import {FormControl,FormGroup,Validators} from '@angular/forms';
+import {HttpClient,HttpErrorResponse} from '@angular/common/http';
+import {map,catchError} from 'rxjs/operators';
+import {User} from '../../models/dto/input/user'
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'cmail-cadastro',
@@ -20,6 +11,13 @@ import {
   styleUrls: ['./cadastro.component.css']
 })
 export class CadastroComponent implements OnInit {
+
+  mensagensErro
+
+  constructor(
+    private ajax: HttpClient,
+    private roteador: Router
+  ) {}
 
   formCadastro = new FormGroup({
     nome: new FormControl('', [Validators.required, Validators.minLength(6)]),
@@ -45,23 +43,44 @@ export class CadastroComponent implements OnInit {
       return
     }
 
-    this.formCadastro.reset();
+    const user = new User(this.formCadastro.value);
+
+    this.ajax
+      .post('http://localhost:3200/users', user)
+      .subscribe(
+        (resposta) => {
+          console.log(resposta);
+          this.formCadastro.reset();
+
+          setTimeout(() => {
+            this.roteador.navigate(['']);
+          }, 1000)
+          
+        },
+        (responseError: HttpErrorResponse) => {
+          this.mensagensErro = responseError.error.body
+        }
+      )
+
+
+    
 
   }
 
-  constructor(private ajax: HttpClient) {}
-
   validaImagem(controleAvatar: FormControl) {
     return this.ajax
-      .head(controleAvatar.value, {observe: 'response'})
+      .head(controleAvatar.value, {
+        observe: 'response'
+      })
       .pipe(
         map((resposta) => {
           console.log(resposta.ok);
           return resposta.ok
-        })
-       ,catchError((erro: HttpErrorResponse) => {
+        }), catchError((erro: HttpErrorResponse) => {
           console.warn(erro);
-          return [{ urlInvalida: true }]
+          return [{
+            urlInvalida: true
+          }]
         })
       )
   }
