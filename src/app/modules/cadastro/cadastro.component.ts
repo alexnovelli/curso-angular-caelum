@@ -62,9 +62,6 @@ export class CadastroComponent implements OnInit {
         }
       )
 
-
-    
-
   }
 
   validaImagem(controleAvatar: FormControl) {
