@@ -8,16 +8,16 @@ import {
   Validators
 } from '@angular/forms';
 import {
-  HttpClient
+  HttpClient, HttpErrorResponse
 } from '@angular/common/http';
 import {
-  map
+  map, catchError
 } from 'rxjs/operators'
 
 @Component({
   selector: 'cmail-cadastro',
   templateUrl: './cadastro.component.html',
-  styles: []
+  styleUrls: ['./cadastro.component.css']
 })
 export class CadastroComponent implements OnInit {
 
@@ -28,8 +28,6 @@ export class CadastroComponent implements OnInit {
     avatar: new FormControl('', Validators.required, this.validaImagem.bind(this)),
     telefone: new FormControl('', [Validators.required, Validators.pattern('[0-9]{4}-?[0-9]{4}[0-9]?')])
   })
-
-  constructor(private ajax: HttpClient) {}
 
   ngOnInit() {}
 
@@ -51,11 +49,21 @@ export class CadastroComponent implements OnInit {
 
   }
 
+  constructor(private ajax: HttpClient) {}
+
   validaImagem(controleAvatar: FormControl) {
-
-    //this.ajax.head
-
-    return new Promise(resolve => resolve());
+    return this.ajax
+      .head(controleAvatar.value, {observe: 'response'})
+      .pipe(
+        map((resposta) => {
+          console.log(resposta.ok);
+          return resposta.ok
+        })
+       ,catchError((erro: HttpErrorResponse) => {
+          console.warn(erro);
+          return [{ urlInvalida: true }]
+        })
+      )
   }
 
 }
