@@ -4,7 +4,7 @@
   </button>
 
   <div class="mdl-layout__header-row">
-    <span class="headerGlobal__title mdl-layout-title">{{ titulo }}</span>
+    <span class="headerGlobal__title mdl-layout-title">{{ tituloHeader }}</span>
 
     <div class="mdl-layout-spacer"></div>
 
@@ -16,7 +16,7 @@
         <span class="material-icons">search</span>
       </label>
       <div class="mdl-textfield__expandable-holder">
-        <input class="headerSearch__input mdl-textfield__input" type="text" name="sample" id="fixed-header-drawer-exp"
+        <input (input)="handleFiltro($event)" class="headerSearch__input mdl-textfield__input" type="text" name="sample" id="fixed-header-drawer-exp"
           placeholder="Filtrar e-mails...">
       </div>
     </div>
@@ -29,7 +29,7 @@
   </span>
 
   <header class="headerGlobal__userInfo">
-    <img src="http://placehold.it/48x48" class="headerGlobal__userInfoAvatar">
+    <img [src]="localImg" class="headerGlobal__userInfoAvatar">
     <div class="headerGlobal__userInfoData">
       <h5 class="headerGlobal__userInfoDataName">Pessoa de Tal</h5>
       <span>pesso.al@cmail.br</span>
@@ -47,7 +47,7 @@
     <a [routerLink]="['..','inbox']" class="mdl-navigation__link">
       <span class="material-icons">inbox</span> Caixa de Entrada
     </a>
-    <a [routerLink]="['..','logout']" class="mdl-navigation__link">
+    <a (click)="logout()" class="mdl-navigation__link">
       <span class="material-icons">logout</span> Logout
     </a>
   </nav>

@@ -1,17 +1,14 @@
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
-  <cmail-header></cmail-header>
+  <cmail-header (filtrar)="handleFiltro($event)"></cmail-header>
   <main class="mdl-layout__content">
     <div class="page-content">
 
-      <ul>
-        <li *ngFor="let email of emailList">
-          {{email.destinatario}},
-          {{email.assunto}},
-          {{email.conteudo}}
-        </li>
-      </ul>
-
       <div class="mdl-grid">
+
+        <ul>
+          <cmail-list-item *ngFor="let email of listaEmailsFiltrados()" [emailConteudo]="email" (remover)="handleRemoverEmail($event)"></cmail-list-item>
+        </ul>
+
         <!-- Floating Multiline Textfield -->
         <button class="globalFab tooltip btn mdl-button mdl-js-button mdl-button--fab mdl-button--colored" role="tooltip" aria-label="Criar novo email" (click)="toggleNewEmailForm()">
           <span class="material-icons">add</span>
@@ -28,7 +25,7 @@
               <!-- [Para] -->
               <div class="cmailInputForm">
                 <div class="mdl-textfield mdl-textfield--floating-label" [ngClass]="{ 'is-invalid': destinatario.invalid && destinatario.touched || formEmail.invalid && formEmail.submitted }">
-                  <input #destinatario="ngModel" [(ngModel)]="email.destinatario" required type="email" name="para" id="para" placeholder=" " class="mdl-textfield__input">
+                  <input email #destinatario="ngModel" [(ngModel)]="email.destinatario" required type="email" name="para" id="para" placeholder=" " class="mdl-textfield__input">
                   <span class="mdl-textfield__error">Informar um email é obrigatório!</span>
                   <label class="mdl-textfield__label" for="para">Para: </label>
                   <span class="mdl-textfield__formline"></span>

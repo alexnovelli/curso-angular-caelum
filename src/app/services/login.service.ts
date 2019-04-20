@@ -5,12 +5,13 @@ import {
   map
 } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 @Injectable()
 
 export class LoginService {
 
-  url = "http://localhost:3200/login"
+  url = environment.api + "/login";
 
   constructor(private conexao: HttpClient) {}
 
@@ -21,6 +22,7 @@ export class LoginService {
         map(
           (resposta: any) => {
             localStorage.setItem('cmail-token', resposta.token)
+            localStorage.setItem('cmail-img', resposta.avatarUrl)
             return resposta
           }
         )

@@ -4,6 +4,8 @@ import {HttpClient,HttpErrorResponse} from '@angular/common/http';
 import {map,catchError} from 'rxjs/operators';
 import {User} from '../../models/dto/input/user'
 import {Router} from '@angular/router';
+import { environment } from 'src/environments/environment';
+import { PageDataService } from 'src/app/services/page-data.service';
 
 @Component({
   selector: 'cmail-cadastro',
@@ -16,8 +18,11 @@ export class CadastroComponent implements OnInit {
 
   constructor(
     private ajax: HttpClient,
-    private roteador: Router
-  ) {}
+    private roteador: Router,
+    private pageService: PageDataService
+  ) {
+    this.pageService.defineTitulo('Cadastro')
+  }
 
   formCadastro = new FormGroup({
     nome: new FormControl('', [Validators.required, Validators.minLength(6)]),
@@ -46,7 +51,7 @@ export class CadastroComponent implements OnInit {
     const user = new User(this.formCadastro.value);
 
     this.ajax
-      .post('http://localhost:3200/users', user)
+      .post(environment.api + '/users', user)
       .subscribe(
         (resposta) => {
           console.log(resposta);
